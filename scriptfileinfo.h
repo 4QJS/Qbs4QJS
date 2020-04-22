@@ -13,7 +13,7 @@ public:
     // original Qbs:
     Q_INVOKABLE QString baseName(const QString &filePath) const;
     Q_INVOKABLE QString canonicalPath(const QString &filePath) const;
-    // Q_INVOKABLE QString cleanPath(const QString &filePath) const;
+    Q_INVOKABLE QString cleanPath(const QString &filePath) const;
     Q_INVOKABLE QString completeBaseName(const QString &filePath) const;
     Q_INVOKABLE QString completeSuffix(const QString &filePath) const;
     Q_INVOKABLE QString fileName(const QString &filePath) const;

@@ -22,11 +22,21 @@ for (const g of globals) {
 
 const tests = [
   "FileInfo.baseName('/home/konsumer/test.txt') === 'test'",
-  "FileInfo.baseName('C:/windows/test.txt') === 'test'"
-
+  "FileInfo.baseName('C:/windows/test.txt') === 'test'",
+  "FileInfo.canonicalPath('/home/konsumer/test.txt') === '.'",
+  "FileInfo.cleanPath('C:/Windows/../test.txt') === 'C:/test.txt'",
+  "FileInfo.completeBaseName('/home/konsumer/test.txt') === 'test'",
+  "FileInfo.completeSuffix('/home/konsumer/test.txt') ==='txt'",
+  "FileInfo.fileName('/home/konsumer/test.txt') ==='test.txt'",
+  "FileInfo.isAbsolutePath('/home/konsumer/test.txt')",
+  "!FileInfo.isAbsolutePath('test.txt')",
+  "FileInfo.path('/home/konsumer/test.txt') == '/home/konsumer'",
+  "FileInfo.suffix('/home/konsumer/test.txt') ==='txt'"
 ]
 
 for (const test of tests) {
   const f = Function(`return ${test}`)
-  console.log('\u001b[0m', test, f() ? '\u001b[32m✓' : '\u001b[31m✗', '\u001b[0m')
+  const v = f()
+  // console.log(v)
+  console.log(v ? '\u001b[32m✓' : '\u001b[31m✗', '\u001b[0m', '\u001b[0m', test)
 }

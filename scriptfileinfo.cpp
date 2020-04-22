@@ -15,10 +15,10 @@ QString ScriptFileInfo::canonicalPath(const QString &filePath) const
 	return QFileInfo(filePath).canonicalPath();
 }
 
-// QString ScriptFileInfo::cleanPath(const QString &filePath) const
-// {
-// 	return QFileInfo(filePath).cleanPath();
-// }
+QString ScriptFileInfo::cleanPath(const QString &filePath) const
+{
+	return QDir().cleanPath(filePath);
+}
 
 QString ScriptFileInfo::completeBaseName(const QString &filePath) const
 {
