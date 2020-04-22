@@ -1,0 +1,5 @@
+{
+	"scripts": {
+		"test": "qbs run -- test.js"
+	}
+}
