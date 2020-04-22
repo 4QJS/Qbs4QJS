@@ -69,3 +69,20 @@ globalObject.setProperty(QStringLiteral("Xml"), mEngine->newQObject(mXml));
 ```
 
 You don't have to include them all, and the global names don't matter, just include & name them how you want.
+
+
+### complete
+
+Not all the services are complete. Ideally, each one needs to have every method tested in the full support matrix (every version of QT that Qbs supports.)
+
+- [ ] BinaryFile
+- [ ] Environment
+- [ ] File
+- [ ] FileInfo
+- [ ] General
+- [ ] Process
+- [ ] PropertyList
+- [ ] TemporaryDir
+- [ ] TextFile
+- [ ] Utilities
+- [ ] Xml
