@@ -80,6 +80,15 @@ globalObject.setProperty(QStringLiteral("Xml"), mEngine->newQObject(mXml));
 
 You don't have to include them all, and the global names don't matter, just include & name them how you want.
 
+### development
+
+If you want to work on it, you'll need qt & qbs installed.
+
+You can build a test program, and run the javascript test with this command:
+
+```sh
+qbs run -- test.js
+```
 
 ### complete
 
