@@ -8,7 +8,17 @@ I find [Qbs services](https://doc.qt.io/qbs/list-of-builtin-services.html) usefu
 
 I wanted to be able to expose all the same services to `QJSEngine`, so I copied their API using regular Qt5 stuff.
 
-You can have a look at the [original Qbs source](https://code.qt.io/cgit/qbs/qbs.git/tree/src/lib/corelib/jsextensions/). This project should mostly follow the same shape, and everything should work the same.
+You can have a look at the [original Qbs source](https://code.qt.io/cgit/qbs/qbs.git/tree/src/lib/corelib/jsextensions/). This project should mostly follow the same shape, and everything should mostly work the same.
+
+### caveats
+
+Anythign with a dynamic number of arguments (like `FileInfo.joinPaths`) uses an array, so it will be liek this, instead:
+
+```js
+FileInfo.joinPaths(['one', 'two', 'three'])
+```
+
+I may eventually figure out how to make it work the other way.
 
 ### usage
 

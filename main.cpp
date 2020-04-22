@@ -21,10 +21,10 @@
 
 bool fromUtf8(const QByteArray &bytes, QString &unicode)
 {
-    QTextCodec::ConverterState state;
-    const QTextCodec *codec = QTextCodec::codecForName("UTF-8");
-    unicode = codec->toUnicode(bytes.constData(), bytes.size(), &state);
-    return state.invalidChars == 0;
+	QTextCodec::ConverterState state;
+	const QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+	unicode = codec->toUnicode(bytes.constData(), bytes.size(), &state);
+	return state.invalidChars == 0;
 }
 
 using namespace std;
@@ -72,13 +72,35 @@ int main(int argc, char *argv[])
 	}
 
 	const QByteArray bytes = file.readAll();
-    QString script;
-    
-    if (!fromUtf8(bytes, script)){
-        script = QTextCodec::codecForUtfText(bytes)->toUnicode(bytes);
-    }
+	QString script;
+	
+	if (!fromUtf8(bytes, script)) {
+		script = QTextCodec::codecForUtfText(bytes)->toUnicode(bytes);
+	}
 
-    QJSValue result = mEngine->evaluate(script, argv[1]);
+	QJSValue result = mEngine->evaluate(script, argv[1]);
+
+	if (result.isError()) {
+		QString errorString = result.toString();
+		QString stack = result.property(QStringLiteral("stack")).toString();
+		const auto stackEntries = stack.splitRef(QLatin1Char('\n'));
+		    if (stackEntries.size() > 0 && !stackEntries.first().startsWith(QLatin1String("%entry@"))) {
+        // Add stack if there were more than one entries
+        errorString.append(QLatin1Char('\n'));
+        errorString.append("Stack traceback:");
+        errorString.append(QLatin1Char('\n'));
+
+        for (const auto &entry : stackEntries) {
+            errorString.append(QLatin1String("  "));
+            errorString.append(entry);
+            errorString.append(QLatin1Char('\n'));
+        }
+
+        errorString.chop(1);
+    }
+    cerr << errorString.toUtf8().constData() << "\n";
+    return 1;
+	}
 
 	return 0;
 }
