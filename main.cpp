@@ -1,4 +1,11 @@
+#include<iostream>
+
+#include <QCoreApplication>
 #include <QQmlEngine>
+#include <QFile>
+#include <QTextCodec>
+#include <QByteArray>
+#include <QString>
 
 #include "scriptbinaryfile.h"
 #include "scriptenvironment.h"
@@ -12,34 +19,66 @@
 #include "scriptutilities.h"
 #include "scriptxml.h"
 
+bool fromUtf8(const QByteArray &bytes, QString &unicode)
+{
+    QTextCodec::ConverterState state;
+    const QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+    unicode = codec->toUnicode(bytes.constData(), bytes.size(), &state);
+    return state.invalidChars == 0;
+}
+
+using namespace std;
 int main(int argc, char *argv[])
 {
-    QQmlEngine mEngine = new QQmlEngine(this);
-    QJSValue globalObject = mEngine->globalObject();
+	if (argc < 2) {
+		cerr << "Usage: Qbs4QJS <script.js>\n";
+		return 1;
+	}
+	
+	QCoreApplication app(argc, argv);
+	QQmlEngine *mEngine = new QQmlEngine();
+	QJSValue globalObject = mEngine->globalObject();
 
-    ScriptBinaryFile mBinaryFile = new ScriptBinaryFile(this);
-    ScriptEnvironment mEnvironment = new ScriptEnvironment(this);
-    ScriptFile mFile = new ScriptFile(this);
-    ScriptFileInfo mFileInfo = new ScriptFileInfo(this);
-    ScriptGeneral mGeneral = new ScriptGeneral(this);
-    ScriptProcess mProcess = new ScriptProcess(this);
-    ScriptPropertyList mPropertyList = new ScriptPropertyList(this);
-    ScriptTemporaryDir mTemporaryDir = new ScriptTemporaryDir(this);
-    ScriptTextFile mTextFile = new ScriptTextFile(this);
-    ScriptUtilities mUtilities = new ScriptUtilities(this);
-    ScriptXml mXml = new ScriptXml(this);
+	ScriptBinaryFile *mBinaryFile = new ScriptBinaryFile();
+	ScriptEnvironment *mEnvironment = new ScriptEnvironment();
+	ScriptFile *mFile = new ScriptFile();
+	ScriptFileInfo *mFileInfo = new ScriptFileInfo();
+	ScriptGeneral *mGeneral = new ScriptGeneral();
+	ScriptProcess *mProcess = new ScriptProcess();
+	ScriptPropertyList *mPropertyList = new ScriptPropertyList();
+	ScriptTemporaryDir *mTemporaryDir = new ScriptTemporaryDir();
+	ScriptTextFile *mTextFile = new ScriptTextFile();
+	ScriptUtilities *mUtilities = new ScriptUtilities();
+	ScriptXml *mXml = new ScriptXml();
 
-    globalObject.setProperty(QStringLiteral("BinaryFile"), mEngine->newQObject(mBinaryFile));
-    globalObject.setProperty(QStringLiteral("Environment"), mEngine->newQObject(mEnvironment));
-    globalObject.setProperty(QStringLiteral("File"), mEngine->newQObject(mFile));
-    globalObject.setProperty(QStringLiteral("FileInfo"), mEngine->newQObject(mFileInfo));
-    globalObject.setProperty(QStringLiteral("General"), mEngine->newQObject(mGeneral));
-    globalObject.setProperty(QStringLiteral("Process"), mEngine->newQObject(mProcess));
-    globalObject.setProperty(QStringLiteral("PropertyList"), mEngine->newQObject(mPropertyList));
-    globalObject.setProperty(QStringLiteral("TemporaryDir"), mEngine->newQObject(mTemporaryDir));
-    globalObject.setProperty(QStringLiteral("TextFile"), mEngine->newQObject(mTextFile));
-    globalObject.setProperty(QStringLiteral("Utilities"), mEngine->newQObject(mUtilities));
-    globalObject.setProperty(QStringLiteral("Xml"), mEngine->newQObject(mXml));
+	globalObject.setProperty(QStringLiteral("BinaryFile"), mEngine->newQObject(mBinaryFile));
+	globalObject.setProperty(QStringLiteral("Environment"), mEngine->newQObject(mEnvironment));
+	globalObject.setProperty(QStringLiteral("File"), mEngine->newQObject(mFile));
+	globalObject.setProperty(QStringLiteral("FileInfo"), mEngine->newQObject(mFileInfo));
+	globalObject.setProperty(QStringLiteral("General"), mEngine->newQObject(mGeneral));
+	globalObject.setProperty(QStringLiteral("Process"), mEngine->newQObject(mProcess));
+	globalObject.setProperty(QStringLiteral("PropertyList"), mEngine->newQObject(mPropertyList));
+	globalObject.setProperty(QStringLiteral("TemporaryDir"), mEngine->newQObject(mTemporaryDir));
+	globalObject.setProperty(QStringLiteral("TextFile"), mEngine->newQObject(mTextFile));
+	globalObject.setProperty(QStringLiteral("Utilities"), mEngine->newQObject(mUtilities));
+	globalObject.setProperty(QStringLiteral("Xml"), mEngine->newQObject(mXml));
 
-    return 0;
+
+	QFile file(argv[1]);
+
+	if (!file.open(QFile::ReadOnly | QFile::Text)) {
+		cerr << "Could not open file!\n";
+		return 1;
+	}
+
+	const QByteArray bytes = file.readAll();
+    QString script;
+    
+    if (!fromUtf8(bytes, script)){
+        script = QTextCodec::codecForUtfText(bytes)->toUnicode(bytes);
+    }
+
+    QJSValue result = mEngine->evaluate(script, argv[1]);
+
+	return 0;
 }

@@ -1,6 +1,8 @@
 import qbs
 
 QtApplication {
+    Depends { name: "Qt.qml" }
+
     cpp.cxxLanguageVersion: "c++11"
 
     cpp.defines: [
