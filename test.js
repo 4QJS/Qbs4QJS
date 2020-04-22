@@ -15,9 +15,9 @@ const globals = [
 ]
 
 for (const g of globals) {
-  console.log(g)
-  console.log(Object.keys(eval(g)))
-  console.log('')
+  console.log('\u001b[33m', g, '\u001b[0m')
+  console.log('\u001b[36m', Object.keys(eval(g)).join(', '), '\u001b[0m')
+  console.log()
 }
 
 const tests = [
@@ -28,5 +28,5 @@ const tests = [
 
 for (const test of tests) {
   const f = Function(`return ${test}`)
-  console.log(test, f() ? '✓' : '✗')
+  console.log('\u001b[0m', test, f() ? '\u001b[32m✓' : '\u001b[31m✗', '\u001b[0m')
 }
