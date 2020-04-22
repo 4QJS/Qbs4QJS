@@ -8,12 +8,14 @@ I find [Qbs services](https://doc.qt.io/qbs/list-of-builtin-services.html) usefu
 
 I wanted to be able to expose all the same services to `QJSEngine`, so I copied their API using regular Qt5 stuff.
 
+You can have a look at the [original Qbs source](https://code.qt.io/cgit/qbs/qbs.git/tree/src/lib/corelib/jsextensions/). This project should mostly follow the same shape, and everything should work the same.
+
 ### usage
 
 You can see an example program that uses all the services in [main.cpp](./main.cpp).
 
 
-> **TODO**: look into the best way to add this to user's projects.
+> **TODO**: look into the best way to add this to user's projects & publish the library.
 
 Add it to your project, and include it like this:
 
