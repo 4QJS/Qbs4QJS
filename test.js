@@ -15,12 +15,6 @@ const globals = [
   'Xml'
 ]
 
-for (const g of globals) {
-  console.log('\u001b[33m', g, '\u001b[0m')
-  console.log('\u001b[36m', Object.keys(eval(g)).join(', '), '\u001b[0m')
-  console.log()
-}
-
 const tests = {
   FileInfo: [
     "FileInfo.baseName('/home/konsumer/test.txt') === 'test'",
@@ -37,9 +31,16 @@ const tests = {
   ]
 }
 
-for (const test of tests) {
-  const f = Function(`return ${test}`)
-  const v = f()
-  // console.log(v)
-  console.log(v ? '\u001b[32m✓' : '\u001b[31m✗', '\u001b[0m', '\u001b[0m', test)
+for (const g of globals) {
+  console.log('\u001b[33m', g, '\u001b[0m')
+  console.log('\u001b[36m', Object.keys(eval(g)).join(', '), '\u001b[0m')
+  console.log()
+  if (tests[g]) {
+    for (const test of tests[g]) {
+      const f = Function(`return ${test}`)
+      const v = f()
+      // console.log(v)
+      console.log(v ? '\u001b[32m✓' : '\u001b[31m✗', '\u001b[0m', '\u001b[0m', test)
+    }
+  }
 }
