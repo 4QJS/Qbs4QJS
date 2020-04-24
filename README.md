@@ -12,7 +12,7 @@ You can have a look at the [original Qbs source](https://code.qt.io/cgit/qbs/qbs
 
 ### caveats
 
-Anythign with a dynamic number of arguments (like `FileInfo.joinPaths`) uses an array, so it will be liek this, instead:
+Anythign with a dynamic number of arguments (like `FileInfo.joinPaths`) uses an array, so it will be like this, instead:
 
 ```js
 FileInfo.joinPaths(['one', 'two', 'three'])
@@ -88,6 +88,14 @@ You can build a test program, and run the javascript test with this command:
 
 ```sh
 qbs run -- test.js
+```
+
+Since I'm new to Qt development, I also made a little package.json, so you can run things:
+
+```sh
+npm test      # build and run against text.js
+npm run build # build tools & library
+npm run lint  # check & fix against stabndard code format
 ```
 
 ### complete
