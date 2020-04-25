@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 	QString fileName = argv[1];
 	QFile scriptFile(fileName);
 	if (!scriptFile.open(QIODevice::ReadOnly)){
-			qDebug() << "Could not open file " << fileName;
+		qDebug() << "Could not open file " << fileName;
 		return 1;
 	}
 	QTextStream stream(&scriptFile);
