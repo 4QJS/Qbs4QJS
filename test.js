@@ -1,5 +1,5 @@
 /* global BinaryFile */
 
-const b1 = new BinaryFile('test.bin', BinaryFile.ReadWrite)
+const b1 = new BinaryFile('test.bin', BinaryFile.ReadOnly)
 console.log(b1.filePath())
-console.log(`${b1.atEof() ? 'At' : 'Not at'} end of file.`)
+console.log(b1.read(b1.size()))
