@@ -14,8 +14,8 @@ public:
 	Q_ENUM(QIODevice::OpenModeFlag)
 
 	Q_INVOKABLE BinaryFile(const QString &filePath, QIODevice::OpenModeFlag mode = QIODevice::ReadOnly) {
-	   m_file = new QFile(filePath);
-	   m_file->open(mode);
+		m_file = new QFile(filePath);
+		m_file->open(mode);
 	}
 	
 	~BinaryFile() override {
