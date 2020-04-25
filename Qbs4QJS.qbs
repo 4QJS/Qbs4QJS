@@ -21,28 +21,7 @@ QtApplication {
     consoleApplication: true
     files: [
         "main.cpp",
-        "scriptbinaryfile.cpp",
-        "scriptbinaryfile.h",
-        "scriptenvironment.cpp",
-        "scriptenvironment.h",
-        "scriptfile.cpp",
-        "scriptfile.h",
-        "scriptfileinfo.cpp",
-        "scriptfileinfo.h",
-        "scriptgeneral.cpp",
-        "scriptgeneral.h",
-        "scriptprocess.cpp",
-        "scriptprocess.h",
-        "scriptpropertylist.cpp",
-        "scriptpropertylist.h",
-        "scripttemporarydir.cpp",
-        "scripttemporarydir.h",
-        "scripttextfile.cpp",
-        "scripttextfile.h",
-        "scriptutilities.cpp",
-        "scriptutilities.h",
-        "scriptxml.cpp",
-        "scriptxml.h",
+        "scriptbinaryfile.h"
     ]
 
     Group {     // Properties for the produced executable
