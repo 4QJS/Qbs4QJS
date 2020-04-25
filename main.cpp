@@ -8,7 +8,7 @@
 #include <QString>
 #include <QDebug>
 
-#include "scriptbinaryfile.h"
+#include "binaryfile.h"
 
 using namespace std;
 int main(int argc, char *argv[])
@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
 	QString contents = stream.readAll();
 	scriptFile.close();
 	
-	jsEngine.globalObject().setProperty("BinaryFile", jsEngine.newQMetaObject(&ScriptBinaryFile::staticMetaObject));
+	jsEngine.globalObject().setProperty("BinaryFile", jsEngine.newQMetaObject(&Qbs4QJS::BinaryFile::staticMetaObject));
 
 	QJSValue result = jsEngine.evaluate(contents, fileName);
 
