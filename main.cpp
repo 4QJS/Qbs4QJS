@@ -1,7 +1,7 @@
 #include<iostream>
 
 #include <QCoreApplication>
-#include <QQmlEngine>
+#include <QJSEngine>
 #include <QFile>
 #include <QTextCodec>
 #include <QByteArray>
@@ -19,7 +19,8 @@ int main(int argc, char *argv[])
 	}
 	
 	QCoreApplication app(argc, argv);
-	QQmlEngine jsEngine;
+	QJSEngine jsEngine;
+	jsEngine.installExtensions(QJSEngine::AllExtensions);
 
 	QString fileName = argv[1];
 	QFile scriptFile(fileName);
@@ -30,7 +31,7 @@ int main(int argc, char *argv[])
 	QTextStream stream(&scriptFile);
 	QString contents = stream.readAll();
 	scriptFile.close();
-	
+
 	jsEngine.globalObject().setProperty("BinaryFile", jsEngine.newQMetaObject(&Qbs4QJS::BinaryFile::staticMetaObject));
 
 	QJSValue result = jsEngine.evaluate(contents, fileName);
