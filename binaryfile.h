@@ -3,7 +3,6 @@
 #include <QFile>
 #include <QIODevice>
 #include <QFileInfo>
-#include <QJSEngine>
 
 namespace Qbs4QJS {
 
@@ -16,10 +15,8 @@ public:
 
 	Q_INVOKABLE BinaryFile(const QString &filePath, QIODevice::OpenModeFlag mode = QIODevice::ReadOnly) {
 		m_file = new QFile(filePath);
+		// should check for false and throw error with jsEngine->throwError(m_file->errorString());
 		m_file->open(mode);
-		// if (!m_file->open(mode)) {
-		// 	jsEngine->throwError(m_file->errorString());
-		// }
 	}
 	
 	~BinaryFile() override {
