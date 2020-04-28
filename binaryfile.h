@@ -22,6 +22,12 @@ public:
 		close();
 	}
 
+	void openCheck() const {
+		if (!m_file){
+			qjsEngine(this)->throwError("File is not open.");
+		}
+	}
+
 	Q_INVOKABLE void open (QIODevice::OpenModeFlag mode = QIODevice::ReadOnly) {
 		if (!m_file->open(mode)){
 			qjsEngine(this)->throwError(m_file->errorString());
@@ -34,33 +40,37 @@ public:
 	}
 
 	Q_INVOKABLE bool atEof() const {
-		if (!m_file){
-			qjsEngine(this)->throwError("File is not open.");
-		}
+		openCheck();
 		return m_file->atEnd();
 	}
 
 	Q_INVOKABLE qint64 size() const {
+		openCheck();
 		return m_file->size();
 	}
 
 	Q_INVOKABLE qint64 pos() const {
+		openCheck();
 		return m_file->pos();
 	}
 
 	Q_INVOKABLE void resize(qint64 size) {
+		openCheck();
 		m_file->resize(size);
 	}
 
 	Q_INVOKABLE void seek(qint64 pos) {
+		openCheck();
 		m_file->seek(pos);
 	}
 
 	Q_INVOKABLE QByteArray read(qint64 size) {
+		openCheck();
 		return m_file->read(size);
 	}
 
 	Q_INVOKABLE void write(const QByteArray &data) {
+		openCheck();
 		m_file->write(data);
 	}
 
