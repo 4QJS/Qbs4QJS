@@ -79,32 +79,6 @@ public:
 		m_file = nullptr;
 	}
 
-	// useful non-qbs methods
-	
-	// Q_INVOKABLE bool fileCopy(const QString &newName) const {
-	// 	return m_file->copy(newName);
-	// }
-
-	// Q_INVOKABLE bool fileExists() const {
-	// 	return m_file->exists();
-	// }
-
-	// Q_INVOKABLE bool fileLink(const QString &newName) const {
-	// 	return m_file->link(newName);
-	// }
-
-	// Q_INVOKABLE bool fileRemove() const {
-	// 	return m_file->remove();
-	// }
-
-	// Q_INVOKABLE bool fileRename(const QString &newName) const {
-	// 	return m_file->rename(newName);
-	// }
-
-	// Q_INVOKABLE QString fileSymLinkTarget() const {
-	// 	return m_file->symLinkTarget();
-	// }
-
 private:
 	QFile *m_file = nullptr;
 };
