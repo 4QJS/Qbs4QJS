@@ -19,7 +19,9 @@ const fi = new FileInfo()
 fi.joinPaths(['one', 'two', 'three'])
 ```
 
-I may eventually figure out how to make it work the other way.
+Another caveat is that class constructors don't throw. An exmaple is `BinaryFile`. I now have a seperate `open` method, so the constructor doesn't throw an error.
+
+I may eventually figure out how to make it work more like the original.
 
 ### usage
 
