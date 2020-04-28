@@ -25,17 +25,20 @@ fi.joinPaths(['one', 'two', 'three'])
 
 #### [constructors don't throw](https://github.com/konsumer/Qbs4QJS/issues/4)
 
-Another caveat is that class constructors don't throw. An example is `BinaryFile`. I now have a seperate `open` method, so the constructor doesn't need to throw an error.
+Class constructors don't throw. An example is `BinaryFile`, there is a seperate `open` method, so the constructor doesn't throw an error.
 
 
 I may eventually figure out how to make it work more like the original.
 
 ### usage
 
+> **TODO**: look into the best way to add this to user's projects & publish the library.
+
+
 You can see an example program that uses all the services in [main.cpp](./main.cpp).
 
+You can just include the headers you need, and they only depend on Qt.
 
-> **TODO**: look into the best way to add this to user's projects & publish the library.
 
 > **TODO**: Put basic import example, from main.cpp, here
 

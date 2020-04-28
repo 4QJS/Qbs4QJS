@@ -21,7 +21,8 @@ QtApplication {
     consoleApplication: true
     files: [
         "main.cpp",
-        "binaryfile.h"
+        "binaryfile.h",
+        "environment.h"
     ]
 
     Group {     // Properties for the produced executable

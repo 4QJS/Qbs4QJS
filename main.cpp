@@ -3,12 +3,11 @@
 #include <QCoreApplication>
 #include <QJSEngine>
 #include <QFile>
-#include <QTextCodec>
-#include <QByteArray>
 #include <QString>
 #include <QDebug>
 
 #include "binaryfile.h"
+#include "environment.h"
 
 using namespace std;
 int main(int argc, char *argv[])
@@ -33,6 +32,7 @@ int main(int argc, char *argv[])
 	scriptFile.close();
 
 	jsEngine.globalObject().setProperty("BinaryFile", jsEngine.newQMetaObject(&Qbs4QJS::BinaryFile::staticMetaObject));
+	jsEngine.globalObject().setProperty("Environment", jsEngine.newQMetaObject(&Qbs4QJS::Environment::staticMetaObject));
 
 	QJSValue result = jsEngine.evaluate(contents, fileName);
 
