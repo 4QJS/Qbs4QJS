@@ -10,6 +10,8 @@ I wanted to be able to expose all the same services to `QJSEngine`, so I copied 
 
 You can have a look at the [original Qbs source](https://code.qt.io/cgit/qbs/qbs.git/tree/src/lib/corelib/jsextensions/). This project should mostly follow the same shape, and everything basically work the same.
 
+> **TODO**: Work out Qt-version support-matrix. It should be easy to tell if people can use this in their thing.
+
 ### caveats
 
 Anything with a dynamic number of arguments (like `FileInfo::joinPaths`) uses an array, so it will be like this, instead:
