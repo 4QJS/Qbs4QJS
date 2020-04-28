@@ -22,22 +22,26 @@ public:
 		close();
 	}
 
+	Q_INVOKABLE void open (QIODevice::OpenModeFlag mode = QIODevice::ReadOnly) {
+		if (!m_file->open(mode)){
+			qjsEngine(this)->throwError(m_file->errorString());
+			m_file = nullptr;
+		}
+	}
+
 	Q_INVOKABLE QString filePath() const {
 		return QFileInfo(*m_file).absoluteFilePath();
 	}
 
 	Q_INVOKABLE bool atEof() const {
+		if (!m_file){
+			qjsEngine(this)->throwError("File is not open.");
+		}
 		return m_file->atEnd();
 	}
 
 	Q_INVOKABLE qint64 size() const {
 		return m_file->size();
-	}
-
-	Q_INVOKABLE void open (QIODevice::OpenModeFlag mode = QIODevice::ReadOnly) {
-		if (!m_file->open(mode)){
-			QJSEngine(this).throwError(m_file->errorString());
-		}
 	}
 
 	Q_INVOKABLE qint64 pos() const {
@@ -61,9 +65,34 @@ public:
 	}
 
 	Q_INVOKABLE void close() {
-		m_file->close();
 		delete m_file;
 		m_file = nullptr;
+	}
+
+	// useful non-qbs methods
+	
+	Q_INVOKABLE bool fileCopy(const QString &newName) const {
+		return m_file->copy(newName);
+	}
+
+	Q_INVOKABLE bool fileExists() const {
+		return m_file->exists();
+	}
+
+	Q_INVOKABLE bool fileLink(const QString &newName) const {
+		return m_file->link(newName);
+	}
+
+	Q_INVOKABLE bool fileRemove() const {
+		return m_file->remove();
+	}
+
+	Q_INVOKABLE bool fileRename(const QString &newName) const {
+		return m_file->rename(newName);
+	}
+
+	Q_INVOKABLE QString fileSymLinkTarget() const {
+		return m_file->symLinkTarget();
 	}
 
 private:
