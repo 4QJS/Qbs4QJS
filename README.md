@@ -14,6 +14,8 @@ You can have a look at the [original Qbs source](https://code.qt.io/cgit/qbs/qbs
 
 ### caveats
 
+#### [variable argument length](https://github.com/konsumer/Qbs4QJS/issues/2)
+
 Anything with a dynamic number of arguments (like `FileInfo::joinPaths`) uses an array, so it will be like this, instead:
 
 ```js
@@ -21,7 +23,10 @@ const fi = new FileInfo()
 fi.joinPaths(['one', 'two', 'three'])
 ```
 
-Another caveat is that class constructors don't throw. An exmaple is `BinaryFile`. I now have a seperate `open` method, so the constructor doesn't throw an error.
+#### [constructors don't throw](https://github.com/konsumer/Qbs4QJS/issues/4)
+
+Another caveat is that class constructors don't throw. An example is `BinaryFile`. I now have a seperate `open` method, so the constructor doesn't need to throw an error.
+
 
 I may eventually figure out how to make it work more like the original.
 
@@ -51,7 +56,7 @@ I also made a little package.json, so you can run things, from node:
 npm i         # install tools from npm
 npm test      # build and run against text.js
 npm run build # build tools & library
-npm run lint  # check & fix against stabndard code format
+npm run lint  # check & fix against [standard code format](https://standardjs.com/)
 ```
 
 ### complete
