@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 	scriptFile.close();
 
 	jsEngine.globalObject().setProperty("BinaryFile", jsEngine.newQMetaObject(&Qbs4QJS::BinaryFile::staticMetaObject));
-	jsEngine.globalObject().setProperty("Environment", jsEngine.newQMetaObject(&Qbs4QJS::Environment::staticMetaObject));
+	jsEngine.globalObject().setProperty("Environment", jsEngine.newQObject(new Qbs4QJS::Environment()));
 
 	QJSValue result = jsEngine.evaluate(contents, fileName);
 

@@ -11,3 +11,13 @@ try {
 }
 
 /* global Environment */
+
+try {
+  // should not work
+  const env = new Environment()
+  console.log(env)
+} catch (e) {
+  console.log('Your Environment:')
+  console.log(JSON.stringify(Environment.currentEnv(), null, 2))
+  console.log('TEST var:', Environment.getEnv('TEST'))
+}
