@@ -56,7 +56,7 @@ npm run lint  # check & fix against stabndard code format
 
 Not all the services are complete. Ideally, each one needs to have every method tested in the full support matrix (every version of QT that Qbs supports.)
 
-- [ ] BinaryFile
+- [X] BinaryFile
 - [ ] Environment
 - [ ] File
 - [ ] FileInfo
