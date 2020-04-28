@@ -34,38 +34,49 @@ public:
 	}
 
 	Q_INVOKABLE bool atEof() const {
-		openCheck();
+		if (!openCheck()){
+			return false;
+		}
 		return m_file->atEnd();
 	}
 
 	Q_INVOKABLE qint64 size() const {
-		openCheck();
+		if (!openCheck()) {
+			return 0;
+		}
 		return m_file->size();
 	}
 
 	Q_INVOKABLE qint64 pos() const {
-		openCheck();
+		if (!openCheck()) {
+			return 0;
+		}
 		return m_file->pos();
 	}
 
 	Q_INVOKABLE void resize(qint64 size) {
-		openCheck();
-		m_file->resize(size);
+		if (openCheck()) {
+			m_file->resize(size);
+		}
 	}
 
 	Q_INVOKABLE void seek(qint64 pos) {
-		openCheck();
-		m_file->seek(pos);
+		if (openCheck()) {
+			m_file->seek(pos);
+		}
 	}
 
 	Q_INVOKABLE QByteArray read(qint64 size) {
-		openCheck();
+		if (!openCheck()) {
+			return QByteArray();
+		}
 		return m_file->read(size);
 	}
 
 	Q_INVOKABLE void write(const QByteArray &data) {
-		openCheck();
-		m_file->write(data);
+		if (openCheck()) {
+			m_file->write(data);
+		}
 	}
 
 	Q_INVOKABLE void close() {
@@ -76,10 +87,12 @@ public:
 private:
 	QFile *m_file = nullptr;
 
-	void openCheck() const {
+	bool openCheck() const {
 		if (!m_file){
 			qjsEngine(this)->throwError("File is not open.");
+			return false;
 		}
+		return true;
 	}
 };
 
