@@ -29,7 +29,8 @@ You can see an example program that uses all the services in [main.cpp](./main.c
 
 
 > **TODO**: look into the best way to add this to user's projects & publish the library.
-> **TODO**: Put basic import form maon.cpp here
+
+> **TODO**: Put basic import example, from main.cpp, here
 
 
 ### development
