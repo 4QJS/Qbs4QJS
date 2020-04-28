@@ -22,12 +22,6 @@ public:
 		close();
 	}
 
-	void openCheck() const {
-		if (!m_file){
-			qjsEngine(this)->throwError("File is not open.");
-		}
-	}
-
 	Q_INVOKABLE void open (QIODevice::OpenModeFlag mode = QIODevice::ReadOnly) {
 		if (!m_file->open(mode)){
 			qjsEngine(this)->throwError(m_file->errorString());
@@ -81,6 +75,12 @@ public:
 
 private:
 	QFile *m_file = nullptr;
+
+	void openCheck() const {
+		if (!m_file){
+			qjsEngine(this)->throwError("File is not open.");
+		}
+	}
 };
 
 } // end namespace Qbs4QJS
