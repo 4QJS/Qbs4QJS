@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QIODevice>
 #include <QFileInfo>
+#include <QJSEngine>
 
 namespace Qbs4QJS {
 
@@ -13,10 +14,8 @@ class BinaryFile : public QObject
 public:
 	Q_ENUM(QIODevice::OpenModeFlag)
 
-	Q_INVOKABLE BinaryFile(const QString &filePath, QIODevice::OpenModeFlag mode = QIODevice::ReadOnly) {
-		m_file = new QFile(filePath);
-		// should check for false and throw error with jsEngine->throwError(m_file->errorString());
-		m_file->open(mode);
+	Q_INVOKABLE BinaryFile(const QString &filePath) {
+		m_file = new QFile(filePath);	
 	}
 	
 	~BinaryFile() override {
@@ -33,6 +32,12 @@ public:
 
 	Q_INVOKABLE qint64 size() const {
 		return m_file->size();
+	}
+
+	Q_INVOKABLE void open (QIODevice::OpenModeFlag mode = QIODevice::ReadOnly) {
+		if (!m_file->open(mode)){
+			QJSEngine(this).throwError(m_file->errorString());
+		}
 	}
 
 	Q_INVOKABLE qint64 pos() const {
