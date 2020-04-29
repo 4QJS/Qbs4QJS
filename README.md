@@ -71,7 +71,7 @@ Here are the Qbs APIs that are implemented:
 - [X] Environment
 - [X] File
 - [X] FileInfo
-- [ ] Process
+- [X] Process
 - [ ] PropertyList
 - [ ] TemporaryDir
 - [ ] TextFile

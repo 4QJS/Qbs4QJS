@@ -5,7 +5,7 @@ console.log('Full Path:', b1.filePath())
 
 try {
   b1.open(BinaryFile.ReadOnly)
-  console.log('Contents:', b1.read(b1.size()))
+  console.log('Contents:', b1.readAll())
 } catch (e) {
   console.error('Error reading file. (thrown in JS.)', e.message)
 }
@@ -34,7 +34,8 @@ console.log(FileInfo.joinPaths(['cool', 'story', 'bro.txt']))
 /* global Process */
 
 const ls = new Process()
-ls.start('ls', ['-al', '/tmp'])
-console.log(ls.readStdOut())
+ls.start('ls', ['-al', '/tmp/'])
 ls.waitForFinished()
+console.log('Exit status:', ls.exitCode())
+console.log(ls.readStdOut())
 ls.close()
