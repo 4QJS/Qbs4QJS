@@ -10,6 +10,7 @@
 #include "environment.h"
 #include "file.h"
 #include "fileinfo.h"
+#include "process.h"
 
 using namespace std;
 int main(int argc, char *argv[])
@@ -37,6 +38,7 @@ int main(int argc, char *argv[])
 	jsEngine.globalObject().setProperty("Environment", jsEngine.newQObject(new Qbs4QJS::Environment()));
 	jsEngine.globalObject().setProperty("File", jsEngine.newQObject(new Qbs4QJS::File()));
 	jsEngine.globalObject().setProperty("FileInfo", jsEngine.newQObject(new Qbs4QJS::FileInfo()));
+	jsEngine.globalObject().setProperty("Process", jsEngine.newQMetaObject(&Qbs4QJS::Process::staticMetaObject));
 
 	QJSValue result = jsEngine.evaluate(contents, fileName);
 

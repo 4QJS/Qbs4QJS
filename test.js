@@ -30,3 +30,5 @@ console.log(JSON.stringify(File.directoryEntries('.'), null, 2))
 /* global FileInfo */
 
 console.log(FileInfo.joinPaths(['cool', 'story', 'bro.txt']))
+
+/* global Process */
