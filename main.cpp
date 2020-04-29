@@ -8,6 +8,7 @@
 
 #include "binaryfile.h"
 #include "environment.h"
+#include "file.h"
 
 using namespace std;
 int main(int argc, char *argv[])
@@ -33,6 +34,7 @@ int main(int argc, char *argv[])
 
 	jsEngine.globalObject().setProperty("BinaryFile", jsEngine.newQMetaObject(&Qbs4QJS::BinaryFile::staticMetaObject));
 	jsEngine.globalObject().setProperty("Environment", jsEngine.newQObject(new Qbs4QJS::Environment()));
+	jsEngine.globalObject().setProperty("File", jsEngine.newQObject(new Qbs4QJS::File()));
 
 	QJSValue result = jsEngine.evaluate(contents, fileName);
 

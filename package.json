@@ -1,6 +1,6 @@
 {
 	"scripts": {
-		"test": "TEST=yes qbs run -- test.js",
+		"test": "TEST='QJS rox!' qbs run -- test.js",
 		"build": "qbs",
 		"lint": "eslint --fix test.js"
 	},

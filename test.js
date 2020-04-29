@@ -21,3 +21,5 @@ try {
   console.log(JSON.stringify(Environment.currentEnv(), null, 2))
   console.log('TEST var:', Environment.getEnv('TEST'))
 }
+
+/* global File */
