@@ -17,8 +17,8 @@ try {
   const env = new Environment()
   console.log(env)
 } catch (e) {
-  console.log('Your Environment:')
-  console.log(JSON.stringify(Environment.currentEnv(), null, 2))
+  // console.log('Your Environment:')
+  // console.log(JSON.stringify(Environment.currentEnv(), null, 2))
   console.log('TEST var:', Environment.getEnv('TEST'))
 }
 
@@ -32,3 +32,9 @@ console.log(JSON.stringify(File.directoryEntries('.'), null, 2))
 console.log(FileInfo.joinPaths(['cool', 'story', 'bro.txt']))
 
 /* global Process */
+
+const ls = new Process()
+ls.start('ls', ['-al', '/tmp'])
+console.log(ls.readStdOut())
+ls.waitForFinished()
+ls.close()

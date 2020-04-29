@@ -84,6 +84,15 @@ public:
 		m_file = nullptr;
 	}
 
+	// useful extras
+
+	Q_INVOKABLE QByteArray readAll() {
+		if (!openCheck()) {
+			return QByteArray();
+		}
+		return m_file->readAll();
+	}
+
 private:
 	QFile *m_file = nullptr;
 

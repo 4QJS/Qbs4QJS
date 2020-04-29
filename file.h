@@ -65,7 +65,7 @@ public:
 	}
 
 	Q_INVOKABLE QStringList directoryEntries(QString path, Filter filter = NoFilter, SortFlag sort = NoSort) const {
-		return QDir(path).entryList((QDir::Filters)filter, (QDir::SortFlag)sort);
+		return QDir(path).entryList((QDir::Filter)filter, (QDir::SortFlag)sort);
 	}
 
 	Q_INVOKABLE QDateTime lastModified(QString filePath) const {

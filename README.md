@@ -19,8 +19,7 @@ You can have a look at the [original Qbs source](https://code.qt.io/cgit/qbs/qbs
 Anything with a dynamic number of arguments (like `FileInfo::joinPaths`) uses an array, so it will be like this, instead:
 
 ```js
-const fi = new FileInfo()
-fi.joinPaths(['one', 'two', 'three'])
+FileInfo.joinPaths(['one', 'two', 'three'])
 ```
 
 #### [constructors don't throw](https://github.com/konsumer/Qbs4QJS/issues/4)
