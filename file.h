@@ -56,27 +56,27 @@ public:
 
 	File() {}
 
-	Q_INVOKABLE bool copy(QString &sourceFilePath, QString &targetFilePath) const {
+	Q_INVOKABLE bool copy(QString sourceFilePath, QString targetFilePath) const {
 		return QFile(sourceFilePath).copy(targetFilePath);
 	}
 
-	Q_INVOKABLE bool exists(QString &filePath) const {
+	Q_INVOKABLE bool exists(QString filePath) const {
 		return QFile(filePath).exists();
 	}
 
-	Q_INVOKABLE QStringList directoryEntries(QString &path, Filter filter = NoFilter,  SortFlag sort = NoSort) const {
+	Q_INVOKABLE QStringList directoryEntries(QString path, Filter filter = NoFilter, SortFlag sort = NoSort) const {
 		return QDir(path).entryList((QDir::Filters)filter, (QDir::SortFlag)sort);
 	}
 
-	Q_INVOKABLE QDateTime lastModified(QString &filePath) const {
+	Q_INVOKABLE QDateTime lastModified(QString filePath) const {
 		return QFileInfo(filePath).lastModified();
 	}
 
-	Q_INVOKABLE bool makePath(QString &path) const {
+	Q_INVOKABLE bool makePath(QString path) const {
 		return QDir::root().mkpath(path);
 	}
 
-	Q_INVOKABLE bool move(QString &oldPath, QString &newPath, bool overwrite = true) const {
+	Q_INVOKABLE bool move(QString oldPath, QString newPath, bool overwrite = true) const {
 		QFileInfo o(newPath);
 		QFileInfo n(newPath);
 		if (overwrite || !n.exists()) {
@@ -95,7 +95,7 @@ public:
 		}
 	}
 
-	Q_INVOKABLE bool remove(QString &filePath) const {
+	Q_INVOKABLE bool remove(QString filePath) const {
 		return QFile(filePath).remove();
 	}
 };

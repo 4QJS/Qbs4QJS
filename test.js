@@ -23,3 +23,10 @@ try {
 }
 
 /* global File */
+
+console.log(File.lastModified('README.md'))
+console.log(JSON.stringify(File.directoryEntries('.'), null, 2))
+
+/* global FileInfo */
+
+console.log(FileInfo.joinPaths(['cool', 'story', 'bro.txt']))
