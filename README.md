@@ -71,7 +71,7 @@ Here are the Qbs APIs that are implemented:
 - [X] BinaryFile
 - [X] Environment
 - [X] File
-- [ ] FileInfo
+- [X] FileInfo
 - [ ] General
 - [ ] Process
 - [ ] PropertyList
@@ -80,5 +80,5 @@ Here are the Qbs APIs that are implemented:
 - [ ] Utilities
 - [ ] Xml
 
-* I'd also like to add "extras" to just about all of these. Qbs service API is the baseline, but I intend to include lots more helpers that are related. `QFileInfo` has lots of useful things, as does `QFile` and `QDir`.
-* I need to go through and verify I am using references & `const` wherever possible. I think I am under-utilizing them, and they would be slightly better.
+* I'd also like to add "extras" to just about all of these. Qbs JS service API is the baseline, but I intend to include lots more helpers that are related. `QFileInfo` has lots of useful things, as does `QFile` and `QDir`.
+* I need to go through and verify I am using references & `const` wherever possible. I think I am under-utilizing them, and they would be better.

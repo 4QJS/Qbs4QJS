@@ -54,6 +54,8 @@ public:
 	};
 	Q_ENUM(SortFlag)
 
+	File() {}
+
 	Q_INVOKABLE bool copy(QString &sourceFilePath, QString &targetFilePath) const {
 		return QFile(sourceFilePath).copy(targetFilePath);
 	}

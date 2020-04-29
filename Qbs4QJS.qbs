@@ -23,7 +23,8 @@ QtApplication {
         "main.cpp",
         "binaryfile.h",
         "environment.h",
-        "file.h"
+        "file.h",
+        "fileinfo.h"
     ]
 
     Group {     // Properties for the produced executable
