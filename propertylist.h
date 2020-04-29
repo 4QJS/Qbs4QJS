@@ -18,7 +18,7 @@ public:
 
 	Q_INVOKABLE void clear() {}
 
-	Q_INVOKABLE void readFromObject(const QScriptValue &value) {}
+	Q_INVOKABLE void readFromObject(const QObject &value) {}
 
 	Q_INVOKABLE void readFromString(const QString &input){}
 
@@ -28,9 +28,9 @@ public:
 
 	Q_INVOKABLE void writeToFile(const QString &filePath, const QString &plistFormat) {}
 
-	Q_INVOKABLE QScriptValue format() const {}
+	// Q_INVOKABLE QObject format() const {}
 
-	Q_INVOKABLE QScriptValue toObject() const {}
+	// Q_INVOKABLE QObject toObject() const {}
 
 	Q_INVOKABLE QString toString(const QString &plistFormat) const {}
 

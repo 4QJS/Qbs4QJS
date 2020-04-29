@@ -73,7 +73,7 @@ Here are the Qbs APIs that are implemented:
 - [X] FileInfo
 - [X] Process
 - [ ] PropertyList
-- [ ] TemporaryDir
+- [X] TemporaryDir
 - [ ] TextFile
 - [ ] Utilities
 - [ ] Xml

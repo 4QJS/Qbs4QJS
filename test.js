@@ -39,3 +39,7 @@ ls.waitForFinished()
 console.log('Exit status:', ls.exitCode())
 console.log(ls.readStdOut())
 ls.close()
+
+/* global TemporaryDir */
+const t = new TemporaryDir()
+console.log(t.path())
