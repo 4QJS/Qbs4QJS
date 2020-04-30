@@ -31,7 +31,7 @@ public:
 	Q_INVOKABLE void open (const QString &filePath, OpenMode mode = ReadOnly) {
 		m_file = new QFile(filePath);
 		m_stream = new QTextStream(m_file);
-		if (!m_file->open((QIODevice::OpenModeFlag)mode|QIODevice::Text)){
+		if (!m_file->open((QIODevice::OpenModeFlag)mode)){
 			qjsEngine(this)->throwError(m_file->errorString());
 			delete m_stream;
 			delete m_file;
@@ -110,6 +110,10 @@ public:
 		jsEngine->globalObject().setProperty("_TextFile", jsEngine->newQMetaObject(&_TextFile::staticMetaObject));
 		// open, and allow throws, in constructor
 		jsEngine->evaluate("function " + jsName + " (filename, mode = _TextFile.ReadOnly) { const f = new _TextFile(); f.open(filename, mode); return f; }");
+		jsEngine->evaluate(jsName + ".ReadOnly = _TextFile.ReadOnly");
+		jsEngine->evaluate(jsName + ".WriteOnly = _TextFile.WriteOnly");
+		jsEngine->evaluate(jsName + ".ReadWrite = _TextFile.ReadWrite");
+		jsEngine->evaluate(jsName + ".Append = _TextFile.Append");
 	}
 };
 

@@ -15,7 +15,7 @@ const test = function (title, underTest) {
 
 /* global BinaryFile */
 console.log(yellow('BinaryFile'))
-test('should throw Error on missing file', () => {
+test('should throw Error on missing file, on read', () => {
   try {
     const f1 = new BinaryFile('bad.bin', BinaryFile.ReadOnly)
     throw (new Error('No error.'))
@@ -24,6 +24,12 @@ test('should throw Error on missing file', () => {
       throw (new Error(`Wrong error: ${e.message}`))
     }
   }
+})
+
+test('should be able to write a file', () => {
+  const f1 = new BinaryFile('./good.bin', BinaryFile.WriteOnly)
+  f1.write('o hai!')
+  f1.close()
 })
 
 /* global Environment */
@@ -104,6 +110,17 @@ test('should be able to read a file', () => {
   const c = f1.readAll()
   if (!c || c === '' || c.indexOf('Qbs') === -1) {
     throw (new Error('Could not.'))
+  }
+})
+
+test('should throw Error on missing file, on read', () => {
+  try {
+    const f1 = new BinaryFile('bad.txt')
+    throw (new Error('No error.'))
+  } catch (e) {
+    if (e.message !== 'No such file or directory') {
+      throw (new Error(`Wrong error: ${e.message}`))
+    }
   }
 })
 
