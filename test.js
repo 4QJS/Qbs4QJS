@@ -100,8 +100,8 @@ test('should be able to delete the temporary dir', () => {
 /* global TextFile */
 console.log(yellow('TextFile'))
 test('should be able to read a file', () => {
-  const f2 = new TextFile('./README.md')
-  const c = f2.readAll()
+  const f1 = new TextFile('./README.md')
+  const c = f1.readAll()
   if (!c || c === '' || c.indexOf('Qbs') === -1) {
     throw (new Error('Could not.'))
   }
