@@ -82,6 +82,7 @@ class FileInfo
 public:
 	FileInfo(QJSEngine *jsEngine, QString jsName = "FileInfo") {
 		jsEngine->globalObject().setProperty(jsName, jsEngine->newQObject(new Qbs4QJS::_FileInfo()));
+		// allow dynamic arg-length
 		jsEngine->evaluate(jsName + ".joinPaths = function (...args) { return this._joinPaths(args) }");
 	}
 };

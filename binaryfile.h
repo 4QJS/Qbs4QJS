@@ -114,6 +114,7 @@ class BinaryFile
 public:
 	BinaryFile(QJSEngine *jsEngine, QString jsName = "BinaryFile") {
 		jsEngine->globalObject().setProperty("_BinaryFile", jsEngine->newQMetaObject(&_BinaryFile::staticMetaObject));
+		// open, and allow throws, in constructor
 		jsEngine->evaluate("function " + jsName + " (filename, mode = _BinaryFile.ReadOnly) { const f = new _BinaryFile(); f.open(filename, mode); return f; }");
 	}
 };

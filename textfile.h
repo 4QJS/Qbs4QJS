@@ -108,6 +108,7 @@ class TextFile
 public:
 	TextFile(QJSEngine *jsEngine, QString jsName = "TextFile") {
 		jsEngine->globalObject().setProperty("_TextFile", jsEngine->newQMetaObject(&_TextFile::staticMetaObject));
+		// open, and allow throws, in constructor
 		jsEngine->evaluate("function " + jsName + " (filename, mode = _TextFile.ReadOnly) { const f = new _TextFile(); f.open(filename, mode); return f; }");
 	}
 };
