@@ -63,8 +63,6 @@ npm run lint  # check & fix against [standard code format](https://standardjs.co
 
 ### todo
 
-Not all the services are complete. Ideally, each one needs to have every method tested in the full support matrix (every version of QT that Qbs supports.)
-
 Here are the Qbs APIs that are implemented:
 
 - [X] BinaryFile
@@ -72,11 +70,17 @@ Here are the Qbs APIs that are implemented:
 - [X] File
 - [X] FileInfo
 - [X] Process
-- [ ] PropertyList - might drop (darwin-only) maybe use [qtplist](https://github.com/reillywatson/qtplist)
 - [X] TemporaryDir
 - [X] TextFile
-- [ ] Utilities - might drop (not really using them anywhere)
-- [ ] Xml
+
+Here are the other ones, which I might drop:
+
+- [ ] PropertyList - darwin-only. maybe use [qtplist](https://github.com/reillywatson/qtplist)
+- [ ] Utilities - not really using this anywhere
+- [ ] Xml -not really using this anywhere
+
+
+Ideally, each one needs to have every method tested in the full support matrix (every version of QT that Qbs supports.) This is not completed.
 
 * I'd also like to add "extras" to just about all of these. Qbs JS service API is the baseline, but I intend to include lots more helpers that are related. `QFileInfo` has lots of useful things, as does `QFile` and `QDir`.
 * I need to go through and verify I am using references & `const` wherever possible. I think I am under-utilizing them, and they would be better.
