@@ -106,3 +106,9 @@ test('should be able to read a file', () => {
     throw (new Error('Could not.'))
   }
 })
+
+test('should be able to write a file', () => {
+  const f1 = new TextFile('./good.txt', TextFile.WriteOnly)
+  f1.write('o hai!')
+  f1.close()
+})
