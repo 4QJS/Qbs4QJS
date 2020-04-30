@@ -1,7 +1,3 @@
-# WIP
-
-This is not at all ready for use, I'm just putting it together.
-
 # Qbs4QJS
 
 I find [Qbs services](https://doc.qt.io/qbs/list-of-builtin-services.html) useful in a javascript-context, but they are made for `QScriptEngine`, which is deprecated.
