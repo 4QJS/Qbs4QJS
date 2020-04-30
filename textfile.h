@@ -110,10 +110,9 @@ public:
 		jsEngine->globalObject().setProperty("_TextFile", jsEngine->newQMetaObject(&_TextFile::staticMetaObject));
 		// open, and allow throws, in constructor
 		jsEngine->evaluate("function " + jsName + " (filename, mode = _TextFile.ReadOnly) { const f = new _TextFile(); f.open(filename, mode); return f; }");
-		jsEngine->evaluate(jsName + ".ReadOnly = _TextFile.ReadOnly");
-		jsEngine->evaluate(jsName + ".WriteOnly = _TextFile.WriteOnly");
-		jsEngine->evaluate(jsName + ".ReadWrite = _TextFile.ReadWrite");
-		jsEngine->evaluate(jsName + ".Append = _TextFile.Append");
+		
+		// copy enum to proxy function
+		jsEngine->evaluate(jsName + ".ReadOnly = _TextFile.ReadOnly;" + jsName + ".WriteOnly = _TextFile.WriteOnly;" + jsName + ".ReadWrite = _TextFile.ReadWrite;" + jsName + ".Append = _TextFile.Append");
 	}
 };
 

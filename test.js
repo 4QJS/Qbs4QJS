@@ -29,7 +29,6 @@ test('should throw Error on missing file, on read', () => {
 test('should be able to write a file', () => {
   const f1 = new BinaryFile('./good.bin', BinaryFile.WriteOnly)
   f1.write('o hai!')
-  f1.close()
 })
 
 /* global Environment */
@@ -127,5 +126,4 @@ test('should throw Error on missing file, on read', () => {
 test('should be able to write a file', () => {
   const f1 = new TextFile('./good.txt', TextFile.WriteOnly)
   f1.write('o hai!')
-  f1.close()
 })

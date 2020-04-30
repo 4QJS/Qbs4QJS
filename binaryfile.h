@@ -116,9 +116,9 @@ public:
 		jsEngine->globalObject().setProperty("_BinaryFile", jsEngine->newQMetaObject(&_BinaryFile::staticMetaObject));
 		// open, and allow throws, in constructor
 		jsEngine->evaluate("function " + jsName + " (filename, mode = _BinaryFile.ReadOnly) { const f = new _BinaryFile(); f.open(filename, mode); return f; }");
-		jsEngine->evaluate(jsName + ".ReadOnly = _BinaryFile.ReadOnly");
-		jsEngine->evaluate(jsName + ".WriteOnly = _BinaryFile.WriteOnly");
-		jsEngine->evaluate(jsName + ".ReadWrite = _BinaryFile.ReadWrite");
+
+		// copy enum to proxy function
+		jsEngine->evaluate(jsName + ".ReadOnly = _BinaryFile.ReadOnly;" + jsName + ".WriteOnly = _BinaryFile.WriteOnly;" + jsName + ".ReadWrite = _BinaryFile.ReadWrite");
 	}
 };
 
