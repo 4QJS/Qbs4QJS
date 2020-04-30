@@ -12,7 +12,12 @@ class BinaryFile : public QObject
 	Q_OBJECT
 
 public:
-	Q_ENUM(QIODevice::OpenModeFlag)
+	enum OpenMode {
+		ReadOnly = QIODevice::ReadOnly,
+    WriteOnly = QIODevice::WriteOnly,
+    ReadWrite = QIODevice::ReadWrite
+	};
+	Q_ENUM(OpenMode)
 
 	Q_INVOKABLE BinaryFile(const QString &filePath) {
 		m_file = new QFile(filePath);	
@@ -22,8 +27,8 @@ public:
 		close();
 	}
 
-	Q_INVOKABLE void open (QIODevice::OpenModeFlag mode = QIODevice::ReadOnly) {
-		if (!m_file->open(mode)){
+	Q_INVOKABLE void open (OpenMode mode = ReadOnly) {
+		if (!m_file->open((QIODevice::OpenModeFlag)mode)){
 			qjsEngine(this)->throwError(m_file->errorString());
 			m_file = nullptr;
 		}

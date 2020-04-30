@@ -72,10 +72,10 @@ Here are the Qbs APIs that are implemented:
 - [X] File
 - [X] FileInfo
 - [X] Process
-- [ ] PropertyList
+- [ ] PropertyList - might drop (darwin-only)
 - [X] TemporaryDir
-- [ ] TextFile
-- [ ] Utilities
+- [X] TextFile
+- [ ] Utilities - might drop (not really using them anywhere)
 - [ ] Xml
 
 * I'd also like to add "extras" to just about all of these. Qbs JS service API is the baseline, but I intend to include lots more helpers that are related. `QFileInfo` has lots of useful things, as does `QFile` and `QDir`.

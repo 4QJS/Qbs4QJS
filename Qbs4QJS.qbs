@@ -26,8 +26,8 @@ QtApplication {
         "file.h",
         "fileinfo.h",
         "process.h",
-        "propertylist.h",
-        "temporarydir.h"
+        "temporarydir.h",
+        "textfile.h"
     ]
 
     Group {     // Properties for the produced executable

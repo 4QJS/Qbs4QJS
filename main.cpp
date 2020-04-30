@@ -11,8 +11,8 @@
 #include "file.h"
 #include "fileinfo.h"
 #include "process.h"
-#include "propertylist.h"
 #include "temporarydir.h"
+#include "textfile.h"
 
 using namespace std;
 int main(int argc, char *argv[])
@@ -41,8 +41,8 @@ int main(int argc, char *argv[])
 	jsEngine.globalObject().setProperty("File", jsEngine.newQObject(new Qbs4QJS::File()));
 	jsEngine.globalObject().setProperty("FileInfo", jsEngine.newQObject(new Qbs4QJS::FileInfo()));
 	jsEngine.globalObject().setProperty("Process", jsEngine.newQMetaObject(&Qbs4QJS::Process::staticMetaObject));
-	jsEngine.globalObject().setProperty("PropertyList", jsEngine.newQMetaObject(&Qbs4QJS::PropertyList::staticMetaObject));
 	jsEngine.globalObject().setProperty("TemporaryDir", jsEngine.newQMetaObject(&Qbs4QJS::TemporaryDir::staticMetaObject));
+	jsEngine.globalObject().setProperty("TextFile", jsEngine.newQMetaObject(&Qbs4QJS::TextFile::staticMetaObject));
 
 	QJSValue result = jsEngine.evaluate(contents, fileName);
 
