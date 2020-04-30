@@ -51,7 +51,7 @@ public:
 		return QFileInfo(filePath).isAbsolute();
 	}
 	
-	Q_INVOKABLE QString joinPaths(QStringList paths) const {
+	Q_INVOKABLE QString _joinPaths(QStringList paths) const {
 		return QDir::cleanPath(paths.join(QDir::separator()));
 	}
 
@@ -82,6 +82,7 @@ class FileInfo
 public:
 	FileInfo(QJSEngine *jsEngine, QString jsName = "FileInfo") {
 		jsEngine->globalObject().setProperty(jsName, jsEngine->newQObject(new Qbs4QJS::_FileInfo()));
+		jsEngine->evaluate(jsName + ".joinPaths = function (...args) { return this._joinPaths(args) }");
 	}
 };
 

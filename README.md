@@ -12,23 +12,6 @@ You can have a look at the [original Qbs source](https://code.qt.io/cgit/qbs/qbs
 
 > **TODO**: Work out Qt-version support-matrix. It should be easy to tell if people can use this in their thing.
 
-### caveats
-
-#### [variable argument length](https://github.com/konsumer/Qbs4QJS/issues/2)
-
-Anything with a dynamic number of arguments (like `FileInfo::joinPaths`) uses an array, so it will be like this, instead:
-
-```js
-FileInfo.joinPaths(['one', 'two', 'three'])
-```
-
-#### [constructors don't throw](https://github.com/konsumer/Qbs4QJS/issues/4)
-
-Class constructors don't throw. An example is `BinaryFile`, there is a seperate `open` method, so the constructor doesn't throw an error.
-
-
-I may eventually figure out how to make it work more like the original.
-
 ### usage
 
 > **TODO**: look into the best way to add this to user's projects & publish the library.
