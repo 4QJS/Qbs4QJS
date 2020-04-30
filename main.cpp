@@ -1,3 +1,5 @@
+// this is a dmeo for usage of Qbs4QJS
+
 #include<iostream>
 
 #include <QCoreApplication>

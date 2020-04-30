@@ -19,10 +19,38 @@ You can have a look at the [original Qbs source](https://code.qt.io/cgit/qbs/qbs
 
 You can see an example program that uses all the services in [main.cpp](./main.cpp).
 
-You can just include the headers you need, and they only depend on Qt.
+You can just include the headers you need, they only depend on Qt, and not each other.
+
+Use it with `QJSEngine` or `QQmlEngine`.
 
 
-> **TODO**: Put basic import example, from main.cpp, here
+```cpp
+#include <Qbs4QJS/binaryfile>
+#include <Qbs4QJS/environment>
+#include <Qbs4QJS/file>
+#include <Qbs4QJS/fileinfo>
+#include <Qbs4QJS/process>
+#include <Qbs4QJS/temporarydir>
+#include <Qbs4QJS/textfile>
+
+// then later in your app:
+
+QJSEngine jsEngine;
+
+Qbs4QJS::BinaryFile sfbin(&jsEngine);
+Qbs4QJS::Environment senv(&jsEngine);
+Qbs4QJS::File sfs(&jsEngine);
+Qbs4QJS::FileInfo sfi(&jsEngine);
+Qbs4QJS::Process sps(&jsEngine);
+Qbs4QJS::TemporaryDir stmp(&jsEngine);
+Qbs4QJS::TextFile sftxt(&jsEngine);
+```
+
+There is an optional 2nd param that allows you to name it something else, in JS-space:
+
+```cpp
+Qbs4QJS::FileInfo sfi(&jsEngine, "MyCoolFileInfo");
+```
 
 
 ### development
@@ -60,7 +88,7 @@ Here are the Qbs APIs that are implemented:
 
 Here are the other ones, which I might drop:
 
-- [ ] PropertyList - darwin-only. maybe use [qtplist](https://github.com/reillywatson/qtplist)
+- [ ] PropertyList - darwin-only. maybe use [qtplist](https://github.com/reillywatson/qtplist)?
 - [ ] Utilities - not really using this anywhere
 - [ ] Xml -not really using this anywhere
 
@@ -70,4 +98,4 @@ Here are the other ones, which I might drop:
 * Ideally, each one needs to have every method tested in the full support matrix (every version of QT that Qbs supports.) This is not completed.
 * I'd also like to add "extras" to just about all of these. Qbs JS service API is the baseline, but I intend to include lots more helpers that are related. `QFileInfo` has lots of useful things, as does `QFile` and `QDir`.
 * I need to go through and verify I am using references & `const` wherever possible. I think I am under-utilizing them, and they would be better.
-* Zip-file service might be helpful, like random-access to files
+* Additional helpful utils could be added: `ZipFile`, [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch), maybe some way to use npm modules.
