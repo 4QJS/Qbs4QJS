@@ -88,7 +88,7 @@ Here are the Qbs APIs that are implemented:
 
 Here are the other ones, which I might drop:
 
-- [ ] PropertyList - darwin-only. maybe use [qtplist](https://github.com/reillywatson/qtplist)?
+- [ ] PropertyList - Qbs version was darwin-only. maybe use [qtplist](https://github.com/reillywatson/qtplist)?
 - [ ] Utilities - not really using this anywhere
 - [ ] Xml -not really using this anywhere
 
