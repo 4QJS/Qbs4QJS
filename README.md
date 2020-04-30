@@ -54,6 +54,7 @@ Qbs4QJS::FileInfo sfi(&jsEngine, "MyCoolFileInfo");
 
 These versions have been tested:
 
+* `5.14.1`
 * `5.14.2`
 
 
