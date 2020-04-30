@@ -10,12 +10,9 @@ I wanted to be able to expose all the same services to `QJSEngine`, so I copied 
 
 You can have a look at the [original Qbs source](https://code.qt.io/cgit/qbs/qbs.git/tree/src/lib/corelib/jsextensions/). This project should mostly follow the same shape, and everything basically work the same.
 
-> **TODO**: Work out Qt-version support-matrix. It should be easy to tell if people can use this in their thing.
-
 ### usage
 
 > **TODO**: look into the best way to add this to user's projects & publish the library.
-
 
 You can see an example program that uses all the services in [main.cpp](./main.cpp).
 
@@ -51,6 +48,13 @@ There is an optional 2nd param that allows you to name it something else, in JS-
 ```cpp
 Qbs4QJS::FileInfo sfi(&jsEngine, "MyCoolFileInfo");
 ```
+
+
+### supported Qt
+
+These versions have been tested:
+
+* `5.14.2`
 
 
 ### development
@@ -89,13 +93,13 @@ Here are the Qbs APIs that are implemented:
 Here are the other ones, which I might drop:
 
 - [ ] PropertyList - Qbs version was darwin-only. maybe use [qtplist](https://github.com/reillywatson/qtplist)?
-- [ ] Utilities - not really using this anywhere
-- [ ] Xml -not really using this anywhere
+- [ ] Utilities - not really using this anywhere, and they are very specialized.
+- [ ] Xml - not really using this anywhere, and it seems a bit complicated.
 
 
 #### more
 
-* Ideally, each one needs to have every method tested in the full support matrix (every version of QT that Qbs supports.) This is not completed.
+* Ideally, each one needs to have every method tested in the full support matrix (every version of Qt that this lib will work with.) This is not completed.
 * I'd also like to add "extras" to just about all of these. Qbs JS service API is the baseline, but I intend to include lots more helpers that are related. `QFileInfo` has lots of useful things, as does `QFile` and `QDir`.
 * I need to go through and verify I am using references & `const` wherever possible. I think I am under-utilizing them, and they would be better.
-* Additional helpful utils could be added: `ZipFile`, [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch), maybe some way to use npm modules.
+* Additional helpful utils could be added: `ZipFile`, `Crypto` (for hashing and encrypt/decrypt), [`fetch`](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch), maybe some way to use npm modules.
