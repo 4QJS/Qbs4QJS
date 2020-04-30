@@ -7,7 +7,7 @@
 
 namespace Qbs4QJS {
 
-class BinaryFile : public QObject
+class _BinaryFile : public QObject
 {
 	Q_OBJECT
 
@@ -19,11 +19,11 @@ public:
 	};
 	Q_ENUM(OpenMode)
 
-	Q_INVOKABLE BinaryFile(const QString &filePath) {
+	Q_INVOKABLE _BinaryFile(const QString &filePath) {
 		m_file = new QFile(filePath);	
 	}
 	
-	~BinaryFile() override {
+	~_BinaryFile() override {
 		close();
 	}
 
@@ -107,6 +107,14 @@ private:
 			return false;
 		}
 		return true;
+	}
+};
+
+class BinaryFile
+{
+public:
+	BinaryFile(QJSEngine *jsEngine, QString jsName = "BinaryFile") {
+		jsEngine->globalObject().setProperty(jsName, jsEngine->newQMetaObject(&_BinaryFile::staticMetaObject));
 	}
 };
 

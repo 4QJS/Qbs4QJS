@@ -9,7 +9,7 @@
 
 namespace Qbs4QJS {
 
-class File : public QObject
+class _File : public QObject
 {
 	Q_OBJECT
 
@@ -54,7 +54,7 @@ public:
 	};
 	Q_ENUM(SortFlag)
 
-	File() {}
+	_File() {}
 
 	Q_INVOKABLE bool copy(QString sourceFilePath, QString targetFilePath) const {
 		return QFile(sourceFilePath).copy(targetFilePath);
@@ -97,6 +97,13 @@ public:
 
 	Q_INVOKABLE bool remove(QString filePath) const {
 		return QFile(filePath).remove();
+	}
+};
+
+class File {
+public:
+	File (QJSEngine *jsEngine, QString jsName = "File"){
+		jsEngine->globalObject().setProperty(jsName, jsEngine->newQObject(new Qbs4QJS::_File()));
 	}
 };
 

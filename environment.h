@@ -5,12 +5,12 @@
 
 namespace Qbs4QJS {
 
-class Environment : public QObject
+class _Environment : public QObject
 {
 	Q_OBJECT
 
 public:
-	Environment() {
+	_Environment() {
 		m_procenv = QProcessEnvironment::systemEnvironment();
 	}
 
@@ -37,6 +37,14 @@ public:
 	
 private:
 	QProcessEnvironment m_procenv;
+};
+
+class Environment
+{
+public:
+	Environment(QJSEngine *jsEngine, QString jsName = "Environment") {
+		jsEngine->globalObject().setProperty(jsName, jsEngine->newQObject(new _Environment()));
+	}
 };
 
 } // end namespace Qbs4QJS

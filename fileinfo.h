@@ -3,15 +3,16 @@
 #include <QStringList>
 #include <QDir>
 #include <QFileInfo>
+#include <QJSEngine>
 
 namespace Qbs4QJS {
 
-class FileInfo : public QObject
+class _FileInfo : public QObject
 {
 	Q_OBJECT
 
 public:
-	FileInfo() {}
+	_FileInfo() {}
 
 	Q_INVOKABLE QString baseName(QString filePath) const {
 		return QFileInfo(filePath).baseName();
@@ -75,5 +76,14 @@ public:
 		return QDir::toNativeSeparators(filePath);
 	}
 };
+
+class FileInfo
+{
+public:
+	FileInfo(QJSEngine *jsEngine, QString jsName = "FileInfo") {
+		jsEngine->globalObject().setProperty(jsName, jsEngine->newQObject(new Qbs4QJS::_FileInfo()));
+	}
+};
+
 
 } // end namespace Qbs4QJS

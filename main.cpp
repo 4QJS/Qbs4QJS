@@ -36,13 +36,13 @@ int main(int argc, char *argv[])
 	QString contents = stream.readAll();
 	scriptFile.close();
 
-	jsEngine.globalObject().setProperty("BinaryFile", jsEngine.newQMetaObject(&Qbs4QJS::BinaryFile::staticMetaObject));
-	jsEngine.globalObject().setProperty("Environment", jsEngine.newQObject(new Qbs4QJS::Environment()));
-	jsEngine.globalObject().setProperty("File", jsEngine.newQObject(new Qbs4QJS::File()));
-	jsEngine.globalObject().setProperty("FileInfo", jsEngine.newQObject(new Qbs4QJS::FileInfo()));
-	jsEngine.globalObject().setProperty("Process", jsEngine.newQMetaObject(&Qbs4QJS::Process::staticMetaObject));
-	jsEngine.globalObject().setProperty("TemporaryDir", jsEngine.newQMetaObject(&Qbs4QJS::TemporaryDir::staticMetaObject));
-	jsEngine.globalObject().setProperty("TextFile", jsEngine.newQMetaObject(&Qbs4QJS::TextFile::staticMetaObject));
+	Qbs4QJS::BinaryFile sfbin(&jsEngine);
+	Qbs4QJS::Environment senv(&jsEngine);
+	Qbs4QJS::File sfs(&jsEngine);
+	Qbs4QJS::FileInfo sfi(&jsEngine);
+	Qbs4QJS::Process sps(&jsEngine);
+	Qbs4QJS::TemporaryDir stmp(&jsEngine);
+	Qbs4QJS::TextFile sftxt(&jsEngine);
 
 	QJSValue result = jsEngine.evaluate(contents, fileName);
 

@@ -7,18 +7,18 @@
 
 namespace Qbs4QJS {
 
-class Process : public QObject
+class _Process : public QObject
 {
 	Q_OBJECT
 
 public:
-	Q_INVOKABLE Process () {
+	Q_INVOKABLE _Process () {
 		m_qProcess = new QProcess;
     m_textStream = new QTextStream(m_qProcess);
     m_environment = QProcessEnvironment::systemEnvironment();
 	}
 
-	~Process () override {
+	~_Process () override {
 		close();
 	}
 
@@ -121,6 +121,14 @@ private:
   QProcessEnvironment m_environment;
   QString m_workingDirectory;
   QTextStream *m_textStream;
+};
+
+class Process
+{
+public:
+	Process(QJSEngine *jsEngine, QString jsName = "Process") {
+		jsEngine->globalObject().setProperty(jsName, jsEngine->newQMetaObject(&_Process::staticMetaObject));
+	}
 };
 
 } // end namespace Qbs4QJS

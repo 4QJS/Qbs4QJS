@@ -1,10 +1,11 @@
 #include <QObject>
 #include <QString>
 #include <QTemporaryDir>
+#include <QJSEngine>
 
 namespace Qbs4QJS {
 
-class TemporaryDir : public QObject
+class _TemporaryDir : public QObject
 {
 	Q_OBJECT
 
@@ -16,8 +17,7 @@ class TemporaryDir : public QObject
 	}
 
 public:
-
-	Q_INVOKABLE TemporaryDir() {
+	Q_INVOKABLE _TemporaryDir() {
 		dir.setAutoRemove(false);
 	}
 
@@ -35,6 +35,14 @@ public:
 
 private:
 	QTemporaryDir dir;
+};
+
+class TemporaryDir
+{
+public:
+	TemporaryDir(QJSEngine *jsEngine, QString jsName = "TemporaryDir") {
+		jsEngine->globalObject().setProperty(jsName, jsEngine->newQMetaObject(&_TemporaryDir::staticMetaObject));
+	}
 };
 
 } // end namespace Qbs4QJS

@@ -8,7 +8,7 @@
 
 namespace Qbs4QJS {
 
-class TextFile : public QObject
+class _TextFile : public QObject
 {
 	Q_OBJECT
 
@@ -21,11 +21,11 @@ public:
 	};
 	Q_ENUM(OpenMode)
 
-	Q_INVOKABLE TextFile(const QString &filePath) {
+	Q_INVOKABLE _TextFile(const QString &filePath) {
 		m_file = new QFile(filePath);	
 	}
 	
-	~TextFile() override {
+	~_TextFile() override {
 		close();
 	}
 
@@ -100,6 +100,14 @@ private:
 			return false;
 		}
 		return true;
+	}
+};
+
+class TextFile
+{
+public:
+	TextFile(QJSEngine *jsEngine, QString jsName = "TextFile") {
+		jsEngine->globalObject().setProperty(jsName, jsEngine->newQMetaObject(&_TextFile::staticMetaObject));
 	}
 };
 
