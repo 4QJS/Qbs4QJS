@@ -87,3 +87,4 @@ Here are the other ones, which I might drop:
 * Ideally, each one needs to have every method tested in the full support matrix (every version of QT that Qbs supports.) This is not completed.
 * I'd also like to add "extras" to just about all of these. Qbs JS service API is the baseline, but I intend to include lots more helpers that are related. `QFileInfo` has lots of useful things, as does `QFile` and `QDir`.
 * I need to go through and verify I am using references & `const` wherever possible. I think I am under-utilizing them, and they would be better.
+* Zip-file service might be helpful, like random-access to files
