@@ -6,9 +6,9 @@ const yellow = s => `\u001b[33m${s}\u001b[0m`
 const test = function (title, underTest) {
   try {
     underTest()
-    console.log('\t', green(title))
+    console.log('\t', green(`✔  ${title}`))
   } catch (e) {
-    console.error('\t', red(`${title} : ${e.message}`))
+    console.error('\t', red(`✗ ${title} : ${e.message}`))
     throw (e)
   }
 }
@@ -62,7 +62,7 @@ test('should be able to get lastModified', () => {
 
 /* global FileInfo */
 console.log(yellow('FileInfo'))
-test('should be able to get joinPaths', () => {
+test('should be able to joinPaths', () => {
   if (FileInfo.joinPaths('cool', 'story', 'bro.txt') !== 'cool/story/bro.txt') {
     throw (new Error('Could not.'))
   }
