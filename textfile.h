@@ -5,6 +5,7 @@
 #include <QFileInfo>
 #include <QJSEngine>
 #include <QTextStream>
+#include <QJSValue>
 
 namespace Qbs4QJS {
 
@@ -21,15 +22,14 @@ public:
 	};
 	Q_ENUM(OpenMode)
 
-	Q_INVOKABLE _TextFile(const QString &filePath) {
-		m_file = new QFile(filePath);	
-	}
+	Q_INVOKABLE _TextFile() {}
 	
 	~_TextFile() override {
 		close();
 	}
 
-	Q_INVOKABLE void open (OpenMode mode = ReadOnly) {
+	Q_INVOKABLE void open (const QString &filePath, OpenMode mode = ReadOnly) {
+		m_file = new QFile(filePath);
 		m_stream = new QTextStream(m_file);
 		if (!m_file->open((QIODevice::OpenModeFlag)mode)){
 			qjsEngine(this)->throwError(m_file->errorString());
@@ -107,7 +107,8 @@ class TextFile
 {
 public:
 	TextFile(QJSEngine *jsEngine, QString jsName = "TextFile") {
-		jsEngine->globalObject().setProperty(jsName, jsEngine->newQMetaObject(&_TextFile::staticMetaObject));
+		jsEngine->globalObject().setProperty("_TextFile", jsEngine->newQMetaObject(&_TextFile::staticMetaObject));
+		jsEngine->evaluate("function " + jsName + " (filename, mode = _TextFile.ReadOnly) { const f = new _TextFile(); f.open(filename, mode); return f; }");
 	}
 };
 

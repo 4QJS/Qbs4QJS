@@ -1,9 +1,6 @@
 /* global BinaryFile */
-const f1 = new BinaryFile('test.bin')
-console.log('Full Path:', f1.filePath())
-
 try {
-  f1.open(BinaryFile.ReadOnly)
+  const f1 = new BinaryFile('bad.bin', BinaryFile.ReadOnly)
   console.log('Contents:', f1.readAll())
 } catch (e) {
   console.error('Error reading file. (thrown in JS.)', e.message)
@@ -40,9 +37,8 @@ const t = new TemporaryDir()
 console.log(t.path())
 
 /* global TextFile */
-const f2 = new TextFile('./README.md')
 try {
-  f2.open(BinaryFile.ReadOnly)
+  const f2 = new TextFile('./README.md')
   console.log('Contents:', f2.readAll())
 } catch (e) {
   console.error('Error reading file. (thrown in JS.)', e.message)

@@ -19,15 +19,14 @@ public:
 	};
 	Q_ENUM(OpenMode)
 
-	Q_INVOKABLE _BinaryFile(const QString &filePath) {
-		m_file = new QFile(filePath);	
-	}
-	
+	Q_INVOKABLE _BinaryFile() {}
+
 	~_BinaryFile() override {
 		close();
 	}
 
-	Q_INVOKABLE void open (OpenMode mode = ReadOnly) {
+	Q_INVOKABLE void open (const QString &filePath, OpenMode mode = ReadOnly) {
+		m_file = new QFile(filePath);	
 		if (!m_file->open((QIODevice::OpenModeFlag)mode)){
 			qjsEngine(this)->throwError(m_file->errorString());
 			m_file = nullptr;
@@ -114,7 +113,8 @@ class BinaryFile
 {
 public:
 	BinaryFile(QJSEngine *jsEngine, QString jsName = "BinaryFile") {
-		jsEngine->globalObject().setProperty(jsName, jsEngine->newQMetaObject(&_BinaryFile::staticMetaObject));
+		jsEngine->globalObject().setProperty("_BinaryFile", jsEngine->newQMetaObject(&_BinaryFile::staticMetaObject));
+		jsEngine->evaluate("function " + jsName + " (filename, mode = _BinaryFile.ReadOnly) { const f = new _BinaryFile(); f.open(filename, mode); return f; }");
 	}
 };
 
