@@ -1,45 +1,108 @@
-/* global BinaryFile */
-try {
-  const f1 = new BinaryFile('bad.bin', BinaryFile.ReadOnly)
-  console.log('Contents:', f1.readAll())
-} catch (e) {
-  console.error('Error reading file. (thrown in JS.)', e.message)
+// this is my very simple testing framework
+const red = s => `\u001b[31m${s}\u001b[0m`
+const green = s => `\u001b[32m${s}\u001b[0m`
+const yellow = s => `\u001b[33m${s}\u001b[0m`
+
+const test = function (title, underTest) {
+  try {
+    underTest()
+    console.log('\t', green(title))
+  } catch (e) {
+    console.error('\t', red(`${title} : ${e.message}`))
+    throw (e)
+  }
 }
+
+/* global BinaryFile */
+console.log(yellow('BinaryFile'))
+test('should throw Error on missing file', () => {
+  try {
+    const f1 = new BinaryFile('bad.bin', BinaryFile.ReadOnly)
+    throw (new Error('No error.'))
+  } catch (e) {
+    if (e.message !== 'No such file or directory') {
+      throw (new Error('wrong error.'))
+    }
+  }
+})
 
 /* global Environment */
-try {
-  // should not work
-  const env = new Environment()
-  console.log(env)
-} catch (e) {
-  // console.log('Your Environment:')
-  // console.log(JSON.stringify(Environment.currentEnv(), null, 2))
-  console.log('TEST var:', Environment.getEnv('TEST'))
-}
+console.log(yellow('Environment'))
+test('should throw if user tries to use it as a class', () => {
+  try {
+    const env = new Environment()
+    throw (new Error('No error.'))
+  } catch (e) {
+    if (e.message !== 'Type error') {
+      throw (new Error('wrong error.'))
+    }
+  }
+})
+
+test('should be able to get env-var TEST', () => {
+  const t = Environment.getEnv('TEST')
+  if (t !== 'QJS rox!') {
+    throw (new Error('Env-var not set correctly.'))
+  }
+})
 
 /* global File */
-console.log(File.lastModified('README.md'))
-console.log(JSON.stringify(File.directoryEntries('.'), null, 2))
+console.log(yellow('File'))
+test('should be able to get lastModified', () => {
+  if (!File.lastModified('README.md')) {
+    throw (new Error('Could not.'))
+  }
+})
 
 /* global FileInfo */
-console.log(FileInfo.joinPaths('cool', 'story', 'bro.txt'))
+console.log(yellow('FileInfo'))
+test('should be able to get joinPaths', () => {
+  if (FileInfo.joinPaths('cool', 'story', 'bro.txt') !== 'cool/story/bro.txt') {
+    throw (new Error('Could not.'))
+  }
+})
 
 /* global Process */
-const ls = new Process()
-ls.start('ls', ['-al', '/tmp/'])
-ls.waitForFinished()
-console.log('Exit status:', ls.exitCode())
-console.log(ls.readStdOut())
-ls.close()
+console.log(yellow('Process'))
+test('should be able to run ls', () => {
+  const ls = new Process()
+  ls.start('ls', ['-al', '/tmp/'])
+  ls.waitForFinished()
+  const c = ls.exitCode()
+  const o = ls.readStdOut()
+  ls.close()
+  if (c) {
+    throw (new Error(`Exit status: ${c}`))
+  }
+  if (!o || o === '') {
+    throw (new Error('Could not.'))
+  }
+})
 
 /* global TemporaryDir */
-const t = new TemporaryDir()
-console.log(t.path())
+console.log(yellow('TemporaryDir'))
+let tempDir
+test('should be able to create a temporary dir', () => {
+  tempDir = new TemporaryDir()
+  const p = tempDir.path()
+  if (!p || p === '') {
+    throw (new Error('Could not.'))
+  }
+})
+
+test('should be able to delete the temporary dir', () => {
+  const ok = tempDir.remove()
+  if (!ok) {
+    throw (new Error('Could not.'))
+  }
+})
 
 /* global TextFile */
-try {
+console.log(yellow('TextFile'))
+test('should be able to read a file', () => {
   const f2 = new TextFile('./README.md')
-  console.log('Contents:', f2.readAll())
-} catch (e) {
-  console.error('Error reading file. (thrown in JS.)', e.message)
-}
+  const c = f2.readAll()
+  if (!c || c === '' || c.indexOf('Qbs') === -1) {
+    throw (new Error('Could not.'))
+  }
+})
