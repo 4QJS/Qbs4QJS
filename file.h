@@ -14,43 +14,42 @@ class _File : public QObject
 	Q_OBJECT
 
 public:
-	// for some reason, I couldn't use the QDir enums here, directly
 	enum Filter {
-		Dirs = 0x001,
-		Files = 0x002,
-		Drives = 0x004,
-		NoSymLinks = 0x008,
-		AllEntries = Dirs | Files | Drives,
-		TypeMask = 0x00f,
-		Readable = 0x010,
-		Writable = 0x020,
-		Executable = 0x040,
-		PermissionMask = 0x070,
-		Modified = 0x080,
-		Hidden = 0x100,
-		System = 0x200,
-		AccessMask  = 0x3F0,
-		AllDirs = 0x400,
-		CaseSensitive = 0x800,
-		NoDot = 0x2000,
-		NoDotDot = 0x4000,
-		NoDotAndDotDot = NoDot | NoDotDot,
-		NoFilter = -1
+		Dirs = QDir::Filter::Dirs,
+		Files = QDir::Filter::Files,
+		Drives = QDir::Filter::Drives,
+		NoSymLinks = QDir::Filter::NoSymLinks,
+		AllEntries = QDir::Filter::AllEntries,
+		TypeMask = QDir::Filter::TypeMask,
+		Readable = QDir::Filter::Readable,
+		Writable = QDir::Filter::Writable,
+		Executable = QDir::Filter::Executable,
+		PermissionMask = QDir::Filter::PermissionMask,
+		Modified = QDir::Filter::Modified,
+		Hidden = QDir::Filter::Hidden,
+		System = QDir::Filter::System,
+		AccessMask  = QDir::Filter::AccessMask ,
+		AllDirs = QDir::Filter::AllDirs,
+		CaseSensitive = QDir::Filter::CaseSensitive,
+		NoDot = QDir::Filter::NoDot,
+		NoDotDot = QDir::Filter::NoDotDot,
+		NoDotAndDotDot = QDir::Filter::NoDotAndDotDot,
+		NoFilter = QDir::Filter::NoFilter
 	};
 	Q_ENUMS(Filter)
 
 	enum SortFlag {
-		Name = 0x00,
-		Time = 0x01,
-		Size = 0x02,
-		Type = 0x80,
-		Unsorted = 0x03,
-		DirsFirst = 0x04,
-		DirsLast = 0x20,
-		Reversed = 0x08,
-		IgnoreCase = 0x10,
-		LocaleAware = 0x40,
-		NoSort = -1
+		Name = QDir::SortFlag::Name,
+		Time = QDir::SortFlag::Time,
+		Size = QDir::SortFlag::Size,
+		Type = QDir::SortFlag::Type,
+		Unsorted = QDir::SortFlag::Unsorted,
+		DirsFirst = QDir::SortFlag::DirsFirst,
+		DirsLast = QDir::SortFlag::DirsLast,
+		Reversed = QDir::SortFlag::Reversed,
+		IgnoreCase = QDir::SortFlag::IgnoreCase,
+		LocaleAware = QDir::SortFlag::LocaleAware,
+		NoSort = QDir::SortFlag::NoSort
 	};
 	Q_ENUM(SortFlag)
 

@@ -75,3 +75,5 @@ default
 
 node_modules
 *.log
+
+good.bin
