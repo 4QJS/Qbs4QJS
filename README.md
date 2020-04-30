@@ -72,7 +72,7 @@ Here are the Qbs APIs that are implemented:
 - [X] File
 - [X] FileInfo
 - [X] Process
-- [ ] PropertyList - might drop (darwin-only)
+- [ ] PropertyList - might drop (darwin-only) maybe use [qtplist](https://github.com/reillywatson/qtplist)
 - [X] TemporaryDir
 - [X] TextFile
 - [ ] Utilities - might drop (not really using them anywhere)
