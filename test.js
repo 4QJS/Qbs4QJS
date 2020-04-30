@@ -21,7 +21,7 @@ test('should throw Error on missing file', () => {
     throw (new Error('No error.'))
   } catch (e) {
     if (e.message !== 'No such file or directory') {
-      throw (new Error('wrong error.'))
+      throw (new Error(`Wrong error: ${e.message}`))
     }
   }
 })
