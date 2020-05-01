@@ -45,6 +45,7 @@ There is an optional 2nd param that allows you to name it something else, in JS-
 Qbs4QJS::FileInfo sfi(&jsEngine, "MyCoolFileInfo");
 ```
 
+You can see the API it adds to your `QJSEngine`, in [the JS documentation](./JSAPI.md).
 
 ### supported Qt
 
