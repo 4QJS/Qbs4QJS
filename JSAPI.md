@@ -1,4 +1,8 @@
-# BinaryFile
+# Javasciprt API
+
+The javascript API closely follows [original Qbs source](https://code.qt.io/cgit/qbs/qbs.git/tree/src/lib/corelib/jsextensions/), and should work just the same.
+
+## BinaryFile
 
 The `BinaryFile` class allows you to read from and write into binary files.
 
@@ -98,7 +102,7 @@ Writes `data` into the file at the current position.
 
 ---
 
-# Environment
+## Environment
 
 The `Environment` object offers access to the system environment or process environment.
 
@@ -138,7 +142,7 @@ Unsets the environment variable with the given name from the build or run enviro
 
 ---
 
-# File
+## File
 
 The `File` object offers limited access to the file system for operations such as copying or removing files.
 
@@ -202,7 +206,7 @@ File.remove(filePath: string): boolean
 
 Removes the file at `filePath`. In case of a directory, it will be removed recursively.
 
-# FileInfo
+## FileInfo
 
 The `FileInfo` object offers various operations on file paths, such as turning absolute paths into relative ones, splitting a path into its components, and so on.
 
@@ -336,7 +340,7 @@ Returns `filePath` with all '/' characters replaced by ''.
 
 ---
 
-# Process
+## Process
 
 The `Process` class allows you to start processes, track their output, and so on.
 
@@ -506,7 +510,7 @@ Writes `data`, followed by the newline character(s), into the process' input cha
 
 --- 
 
-# TemporaryDir
+## TemporaryDir
 
 The `TemporaryDir` class creates a unique directory for temporary use.
 
@@ -546,7 +550,7 @@ Removes the temporary directory, including all its contents. Returns `true` if r
 
 ---
 
-# TextFile
+## TextFile
 
 The `TextFile` class allows you to read from and write into text files.
 
