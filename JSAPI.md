@@ -1,4 +1,4 @@
-# Javasciprt API
+# Qbs4QJS Javascript API
 
 The javascript API closely follows [original Qbs source](https://code.qt.io/cgit/qbs/qbs.git/tree/src/lib/corelib/jsextensions/), and should work just the same.
 
