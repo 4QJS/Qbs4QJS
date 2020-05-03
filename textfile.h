@@ -31,7 +31,7 @@ public:
 	Q_INVOKABLE void open (const QString &filePath, OpenMode mode = ReadOnly) {
 		m_file = new QFile(filePath);
 		m_stream = new QTextStream(m_file);
-		if (!m_file->open((QIODevice::OpenModeFlag)mode)){
+		if (!m_file->open((QIODevice::OpenModeFlag)mode|QIODevice::Text)){
 			qjsEngine(this)->throwError(m_file->errorString());
 			delete m_stream;
 			delete m_file;
